@@ -1,0 +1,60 @@
+[
+  {
+    "uuid": "14324d4f-a2f1-4954-8673-45429b45c632",
+    "name": "Nebulix Logística",
+    "regions": [
+      {
+        "name": "SUDESTE",
+        "delivery_time_day": 4,
+        "price_per_kg": 5.9
+      },
+      {
+        "name": "SUL",
+        "delivery_time_day": 4,
+        "price_per_kg": 5.9
+      }
+    ]
+  },
+  {
+    "uuid": "20d2a910-ffa2-4d6d-be00-a4aa1653b8c7",
+    "name": "RotaFácil Transportes",
+    "regions": [
+      {
+        "name": "CENTRO-OESTE",
+        "delivery_time_day": 9,
+        "price_per_kg": 6.22
+      },
+      {
+        "name": "NORDESTE",
+        "delivery_time_day": 13,
+        "price_per_kg": 8
+      },
+      {
+        "name": "SUDESTE",
+        "delivery_time_day": 7,
+        "price_per_kg": 4.35
+      },
+      {
+        "name": "SUL",
+        "delivery_time_day": 7,
+        "price_per_kg": 4.35
+      }
+    ]
+  },
+  {
+    "uuid": "701a9aa6-6cd7-4d8c-8dbe-5efc31cf1afe",
+    "name": "Moventra Express",
+    "regions": [
+      {
+        "name": "CENTRO-OESTE",
+        "delivery_time_day": 7,
+        "price_per_kg": 7.3
+      },
+      {
+        "name": "NORDESTE",
+        "delivery_time_day": 10,
+        "price_per_kg": 9.5
+      }
+    ]
+  }
+]
