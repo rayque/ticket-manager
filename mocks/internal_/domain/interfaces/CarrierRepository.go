@@ -44,17 +44,17 @@ func (_m *CarrierRepository) GetCarriersByRegion(ctx context.Context, uuid strin
 	return r0, r1
 }
 
-// GetRegionByState provides a mock function with given fields: ctx, state
-func (_m *CarrierRepository) GetRegionByState(ctx context.Context, state string) string {
-	ret := _m.Called(ctx, state)
+// GetRegionByState provides a mock function with given fields: state
+func (_m *CarrierRepository) GetRegionByState(state string) string {
+	ret := _m.Called(state)
 
 	if len(ret) == 0 {
 		panic("no return value specified for GetRegionByState")
 	}
 
 	var r0 string
-	if rf, ok := ret.Get(0).(func(context.Context, string) string); ok {
-		r0 = rf(ctx, state)
+	if rf, ok := ret.Get(0).(func(string) string); ok {
+		r0 = rf(state)
 	} else {
 		r0 = ret.Get(0).(string)
 	}

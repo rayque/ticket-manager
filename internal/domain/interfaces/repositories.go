@@ -12,6 +12,6 @@ type PackageRepository interface {
 }
 
 type CarrierRepository interface {
-	GetRegionByState(ctx context.Context, state string) string
+	GetRegionByState(state string) string
 	GetCarriersByRegion(ctx context.Context, uuid string) ([]entities.Carrier, error)
 }

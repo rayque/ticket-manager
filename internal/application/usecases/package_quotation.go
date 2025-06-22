@@ -28,7 +28,7 @@ func (p PackageQuotationUseCase) Execute(ctx context.Context, uuid string) ([]en
 		return []entities.Quotation{}, err
 	}
 
-	region := p.carrierRepository.GetRegionByState(ctx, pack.Destination)
+	region := p.carrierRepository.GetRegionByState(pack.Destination)
 	carriers, err := p.carrierRepository.GetCarriersByRegion(ctx, region)
 	if err != nil {
 		return []entities.Quotation{}, err

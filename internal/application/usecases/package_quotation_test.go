@@ -44,7 +44,7 @@ func (p *PackageQuotationUseCaseTestSuite) TestPackageQuotationUseCase_Execute()
 	p.packageRepository.On("GetPackageByUuid", ctx, uuid).Return(expectedPackage, nil)
 
 	expectedRegion := "SP"
-	p.carrierRepository.On("GetRegionByState", ctx, expectedPackage.Destination).Return(expectedRegion)
+	p.carrierRepository.On("GetRegionByState", expectedPackage.Destination).Return(expectedRegion)
 
 	expectedCarriers := []entities.Carrier{
 		{
@@ -100,7 +100,7 @@ func (p *PackageQuotationUseCaseTestSuite) TestPackageQuotationUseCase_Execute_C
 	p.packageRepository.On("GetPackageByUuid", ctx, uuid).Return(expectedPackage, nil)
 
 	expectedRegion := "SP"
-	p.carrierRepository.On("GetRegionByState", ctx, expectedPackage.Destination).Return(expectedRegion)
+	p.carrierRepository.On("GetRegionByState", expectedPackage.Destination).Return(expectedRegion)
 
 	mockError := app_errors.ErrNoCarrierFound
 	p.carrierRepository.On("GetCarriersByRegion", ctx, expectedRegion).Return(nil, mockError)

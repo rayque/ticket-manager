@@ -25,7 +25,7 @@ func NewCarrierRepository(
 	}
 }
 
-func (c carrierRepository) GetRegionByState(ctx context.Context, state string) string {
+func (c carrierRepository) GetRegionByState(state string) string {
 	return strings.ToUpper(entities.StateRegion[strings.ToUpper(state)])
 }
 
