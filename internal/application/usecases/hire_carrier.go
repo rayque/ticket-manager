@@ -2,7 +2,7 @@ package usecases
 
 import (
 	"context"
-	"errors"
+	"shipping-management/internal/domain/app_errors"
 	"shipping-management/internal/domain/entities"
 	"shipping-management/internal/domain/interfaces"
 )
@@ -26,7 +26,7 @@ func (h HireCarrierUseCase) Execute(ctx context.Context, packageUuid string, car
 	}
 
 	if pkg.Status != entities.StatusCreated {
-		return entities.Package{}, errors.New("package is not in a valid state to hire a carrier")
+		return entities.Package{}, app_errors.ErrInvalidPackageStatus
 	}
 
 	pkg.CarrierUUID = carrierUuid

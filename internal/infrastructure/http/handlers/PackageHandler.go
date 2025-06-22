@@ -34,13 +34,13 @@ func NewPackageHandler(
 	}
 }
 
-var req struct {
-	Product     string  `json:"product" validate:"required"`
-	Weight      float64 `json:"weight" validate:"required"`
-	Destination string  `json:"destination" validate:"required"`
-}
-
 func (p *PackageHandler) CreatePackage(c *gin.Context) {
+	var req struct {
+		Product     string  `json:"product" validate:"required"`
+		Weight      float64 `json:"weight" validate:"required"`
+		Destination string  `json:"destination" validate:"required"`
+	}
+
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error":   "Erro na validação do JSON",
@@ -49,19 +49,20 @@ func (p *PackageHandler) CreatePackage(c *gin.Context) {
 
 		return
 	}
+
 	errValidator := validator.ValidateRequest(req)
 	if errValidator != nil {
 		c.JSON(http.StatusBadRequest, errValidator)
 		return
 	}
 
-	context := c.Request.Context()
 	pack := entities.Package{
 		Product:     req.Product,
 		Weight:      req.Weight,
 		Destination: req.Destination,
 	}
-	createdPackage, err := p.createUseCase.Execute(context, pack)
+
+	createdPackage, err := p.createUseCase.Execute(c.Request.Context(), pack)
 	if err != nil {
 		println(err.Error())
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create package"})
@@ -72,8 +73,12 @@ func (p *PackageHandler) CreatePackage(c *gin.Context) {
 }
 
 func (p *PackageHandler) GetPackage(c *gin.Context) {
-	uuid := c.Param("uuid")
-	pkg, err := p.getUseCase.Execute(c.Request.Context(), uuid)
+	packageUuid := c.Param("uuid")
+	if packageUuid == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Package UUID is required"})
+		return
+	}
+	pkg, err := p.getUseCase.Execute(c.Request.Context(), packageUuid)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Package not found"})
 		return
@@ -155,7 +160,7 @@ func (p *PackageHandler) HireCarrierForPackageDelivery(c *gin.Context) {
 	}
 	pkg, err := p.hireCarrierUseCase.Execute(c.Request.Context(), req.PackageUuid, req.CarrierUuid)
 	if err != nil {
-		if errors.Is(err, app_errors.ErrPackageNotFound) {
+		if errors.Is(err, app_errors.ErrPackageNotFound) || errors.Is(err, app_errors.ErrInvalidPackageStatus) {
 			c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 			return
 		}

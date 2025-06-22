@@ -7,6 +7,7 @@ import (
 	"shipping-management/internal/infrastructure/adapters/database"
 	"shipping-management/internal/infrastructure/adapters/uuid"
 	"shipping-management/internal/infrastructure/config"
+	"shipping-management/internal/infrastructure/http"
 	"shipping-management/internal/infrastructure/http/handlers"
 	repository "shipping-management/internal/infrastructure/repositories"
 )
@@ -46,12 +47,7 @@ func main() {
 		hireCarrierUseCase,
 	)
 
-	r.POST("/create", packageHandler.CreatePackage)
-	r.GET("/get/:uuid", packageHandler.GetPackage)
-	r.PATCH("/update/status", packageHandler.UpdatePackageStatus)
-	r.GET("/quotation/:uuid", packageHandler.GetQuotation)
-	r.POST("/hire/carrier", packageHandler.HireCarrierForPackageDelivery)
-	//http.RegisterRoutes(r)
+	http.RegisterRoutes(r, packageHandler)
 	err = r.Run(":8080")
 	if err != nil {
 		return

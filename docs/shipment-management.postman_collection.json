@@ -1,0 +1,536 @@
+{
+	"info": {
+		"_postman_id": "f69e6f43-f26a-4c10-9fac-866595a3454b",
+		"name": "shipment-management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4677025",
+		"_collection_link": "https://restless-zodiac-749600.postman.co/workspace/0ff2c8c5-4082-4b08-8bff-e363a8127c47/collection/4677025-f69e6f43-f26a-4c10-9fac-866595a3454b?action=share&source=collection_link&creator=4677025"
+	},
+	"item": [
+		{
+			"name": "Create package",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product\": \"Pneu\",\r\n    \"Weight\": 50,\r\n    \"destination\": \"PI\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/package",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"package"
+					]
+				},
+				"description": "Create a package"
+			},
+			"response": [
+				{
+					"name": "Create package",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, text/plain, */*",
+								"disabled": true
+							},
+							{
+								"key": "Accept-Language",
+								"value": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDQyMzY5MzcsImV4cCI6MTc0NDI0MDUzNywibmJmIjoxNzQ0MjM2OTM3LCJqdGkiOiJrT2RiRm1YWVB6RGF2QjdzIiwic3ViIjoiMSIsInBydiI6ImY5MzA3ZWI1ZjI5YzcyYTkwZGJhYWVmMGUyNmYwMjYyZWRlODZmNTUifQ.0tEEKPi8qyMnw1aW5WwvKgwXNjhoQYxRY2YR8PQdadI",
+								"disabled": true
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"disabled": true
+							},
+							{
+								"key": "Origin",
+								"value": "http://localhost:8080",
+								"disabled": true
+							},
+							{
+								"key": "Referer",
+								"value": "http://localhost:8080/",
+								"disabled": true
+							},
+							{
+								"key": "Sec-Fetch-Dest",
+								"value": "empty",
+								"disabled": true
+							},
+							{
+								"key": "Sec-Fetch-Mode",
+								"value": "cors",
+								"disabled": true
+							},
+							{
+								"key": "Sec-Fetch-Site",
+								"value": "same-site",
+								"disabled": true
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+								"disabled": true
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"",
+								"disabled": true
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0",
+								"disabled": true
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\"",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": \"Pneu\",\r\n    \"Weight\": 50,\r\n    \"destination\": \"PI\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/package",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"package"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 21 Jun 2025 23:35:08 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "139"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 7,\n    \"uuid\": \"2b706ff0-c9ed-4f86-a03e-c68df44c401d\",\n    \"product\": \"Pneu\",\n    \"weight\": 50,\n    \"destination\": \"PI\",\n    \"status\": \"CREATED\",\n    \"carrier_uuid\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Package",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/package/1485d113-1324-420f-a355-6cfae791ef25",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"package",
+						"1485d113-1324-420f-a355-6cfae791ef25"
+					]
+				},
+				"description": "Get a package"
+			},
+			"response": [
+				{
+					"name": "get package",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/package/1485d113-1324-420f-a355-6cfae791ef25",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"package",
+								"1485d113-1324-420f-a355-6cfae791ef25"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 21 Jun 2025 22:09:43 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "189"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 4,\n    \"uuid\": \"1485d113-1324-420f-a355-6cfae791ef25\",\n    \"product\": \"per\",\n    \"weight\": 50,\n    \"destination\": \"PI\",\n    \"status\": \"WAITING_FOR_COLLECTION\",\n    \"carrier_uuid\": \"701a9aa6-6cd7-4d8c-8dbe-5efc31cf1afe\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Package Quotation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/package/quotation/2e61417f-f594-4844-a2d4-60175e934cab",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"package",
+						"quotation",
+						"2e61417f-f594-4844-a2d4-60175e934cab"
+					]
+				},
+				"description": "Get quotation of a package"
+			},
+			"response": [
+				{
+					"name": "Package Quotation",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/package/quotation/2e61417f-f594-4844-a2d4-60175e934cab",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"package",
+								"quotation",
+								"2e61417f-f594-4844-a2d4-60175e934cab"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 21 Jun 2025 23:33:55 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "293"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"carrier\": \"RotaFácil Transportes\",\n        \"carrier_uuid\": \"20d2a910-ffa2-4d6d-be00-a4aa1653b8c7\",\n        \"estimated_price\": 400,\n        \"estimated_delivery_time_by_day\": 13\n    },\n    {\n        \"carrier\": \"Moventra Express\",\n        \"carrier_uuid\": \"701a9aa6-6cd7-4d8c-8dbe-5efc31cf1afe\",\n        \"estimated_price\": 475,\n        \"estimated_delivery_time_by_day\": 10\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Hire Carrier",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDQyMzY5MzcsImV4cCI6MTc0NDI0MDUzNywibmJmIjoxNzQ0MjM2OTM3LCJqdGkiOiJrT2RiRm1YWVB6RGF2QjdzIiwic3ViIjoiMSIsInBydiI6ImY5MzA3ZWI1ZjI5YzcyYTkwZGJhYWVmMGUyNmYwMjYyZWRlODZmNTUifQ.0tEEKPi8qyMnw1aW5WwvKgwXNjhoQYxRY2YR8PQdadI"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Origin",
+						"value": "http://localhost:8080"
+					},
+					{
+						"key": "Referer",
+						"value": "http://localhost:8080/"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-site"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"package_uuid\": \"1485d113-1324-420f-a355-6cfae791ef25\",\r\n    \"carrier_uuid\": \"701a9aa6-6cd7-4d8c-8dbe-5efc31cf1afe\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/package/hire/carrier",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"package",
+						"hire",
+						"carrier"
+					]
+				},
+				"description": "Hire a carrier"
+			},
+			"response": [
+				{
+					"name": "hire Carrier",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDQyMzY5MzcsImV4cCI6MTc0NDI0MDUzNywibmJmIjoxNzQ0MjM2OTM3LCJqdGkiOiJrT2RiRm1YWVB6RGF2QjdzIiwic3ViIjoiMSIsInBydiI6ImY5MzA3ZWI1ZjI5YzcyYTkwZGJhYWVmMGUyNmYwMjYyZWRlODZmNTUifQ.0tEEKPi8qyMnw1aW5WwvKgwXNjhoQYxRY2YR8PQdadI"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Origin",
+								"value": "http://localhost:8080"
+							},
+							{
+								"key": "Referer",
+								"value": "http://localhost:8080/"
+							},
+							{
+								"key": "Sec-Fetch-Dest",
+								"value": "empty"
+							},
+							{
+								"key": "Sec-Fetch-Mode",
+								"value": "cors"
+							},
+							{
+								"key": "Sec-Fetch-Site",
+								"value": "same-site"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"package_uuid\": \"1485d113-1324-420f-a355-6cfae791ef25\",\r\n    \"carrier_uuid\": \"701a9aa6-6cd7-4d8c-8dbe-5efc31cf1afe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/package/hire/carrier",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"package",
+								"hire",
+								"carrier"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 21 Jun 2025 22:10:08 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Failed to hire carrier for package delivery\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update package status",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"UUID\": \"5c39f725-ce3a-4cc1-95b4-7914a710e46a\",\r\n    \"status\": \"WAITING_FOR_COLLECTION\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/package/update/status",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"package",
+						"update",
+						"status"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "update package status",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UUID\": \"5c39f725-ce3a-4cc1-95b4-7914a710e46a\",\r\n    \"status\": \"WAITING_FOR_COLLECTION\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/package/update/status",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"package",
+								"update",
+								"status"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 21 Jun 2025 22:10:00 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "153"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 5,\n    \"uuid\": \"5c39f725-ce3a-4cc1-95b4-7914a710e46a\",\n    \"product\": \"per\",\n    \"weight\": 50,\n    \"destination\": \"PI\",\n    \"status\": \"WAITING_FOR_COLLECTION\",\n    \"carrier_uuid\": \"\"\n}"
+				}
+			]
+		}
+	]
+}

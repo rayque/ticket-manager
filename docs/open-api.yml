@@ -1,0 +1,181 @@
+openapi: 3.0.0
+info:
+  title: Shipment Management API
+  version: "1.0"
+  description: API para gerenciamento de pacotes a partir da coleção Postman.
+servers:
+  - url: http://localhost:8080
+paths:
+  /package:
+    post:
+      summary: Cria um pacote
+      description: Cria um novo pacote.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product:
+                  type: string
+                weight:
+                  type: number
+                destination:
+                  type: string
+              required:
+                - product
+                - weight
+                - destination
+      responses:
+        "201":
+          description: Pacote criado com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  uuid:
+                    type: string
+                  product:
+                    type: string
+                  weight:
+                    type: number
+                  destination:
+                    type: string
+                  status:
+                    type: string
+                  carrier_uuid:
+                    type: string
+  /package/{uuid}:
+    get:
+      summary: Consulta um pacote
+      description: Retorna os dados de um pacote pelo seu UUID.
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Dados do pacote.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  uuid:
+                    type: string
+                  product:
+                    type: string
+                  weight:
+                    type: number
+                  destination:
+                    type: string
+                  status:
+                    type: string
+                  carrier_uuid:
+                    type: string
+  /package/quotation/{package_uuid}:
+    get:
+      summary: Cotações de pacote
+      description: Retorna as cotações disponíveis para um pacote.
+      parameters:
+        - name: quotation_uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lista de cotações.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    carrier:
+                      type: string
+                    carrier_uuid:
+                      type: string
+                    estimated_price:
+                      type: number
+                    estimated_delivery_time_by_day:
+                      type: number
+  /package/hire/carrier:
+    post:
+      summary: Contrata transportadora
+      description: Contrata a transportadora para entrega do pacote.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                package_uuid:
+                  type: string
+                carrier_uuid:
+                  type: string
+              required:
+                - package_uuid
+                - carrier_uuid
+      responses:
+        "200":
+          description: Carrier contratado com sucesso.
+        "500":
+          description: Falha ao contratar a transportadora.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /package/update/status:
+    patch:
+      summary: Atualiza status do pacote
+      description: Atualiza o status de um pacote a partir do seu UUID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                UUID:
+                  type: string
+                status:
+                  type: string
+              required:
+                - UUID
+                - status
+      responses:
+        "200":
+          description: Status atualizado com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  uuid:
+                    type: string
+                  product:
+                    type: string
+                  weight:
+                    type: number
+                  destination:
+                    type: string
+                  status:
+                    type: string
+                  carrier_uuid:
+                    type: string
