@@ -15,6 +15,7 @@ type Config struct {
 	PostgresDB       string
 	PostgresPort     string
 	PostgresHost     string
+	JWTSecret        string
 }
 
 func NewConfig() *Config {
@@ -32,5 +33,15 @@ func NewConfig() *Config {
 		PostgresDB:       os.Getenv("POSTGRES_DB"),
 		PostgresPort:     os.Getenv("POSTGRES_PORT"),
 		PostgresHost:     os.Getenv("POSTGRES_HOST"),
+		JWTSecret:        getJWTSecret(),
 	}
+}
+
+func getJWTSecret() string {
+	secret := os.Getenv("JWT_SECRET")
+	if secret == "" {
+		log.Println("JWT_SECRET não encontrado no .env, usando valor padrão (NÃO RECOMENDADO PARA PRODUÇÃO)")
+		return "default-jwt-secret-key-change-in-production"
+	}
+	return secret
 }

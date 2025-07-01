@@ -17,11 +17,12 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 
 func (ur *UserRepository) CreateUser(ctx context.Context, user entities.User) (entities.User, error) {
 	userDTO := dtos.UserDTO{
-		UUID:    user.UUID,
-		Name:    user.Name,
-		Email:   user.Email,
-		Phone:   user.Phone,
-		Address: user.Address,
+		UUID:     user.UUID,
+		Name:     user.Name,
+		Email:    user.Email,
+		Password: user.Password,
+		Phone:    user.Phone,
+		Address:  user.Address,
 	}
 
 	if err := ur.db.WithContext(ctx).Create(&userDTO).Error; err != nil {
@@ -33,6 +34,7 @@ func (ur *UserRepository) CreateUser(ctx context.Context, user entities.User) (e
 		UUID:      userDTO.UUID,
 		Name:      userDTO.Name,
 		Email:     userDTO.Email,
+		Password:  userDTO.Password,
 		Phone:     userDTO.Phone,
 		Address:   userDTO.Address,
 		CreatedAt: userDTO.CreatedAt,
@@ -51,6 +53,7 @@ func (ur *UserRepository) GetUserByUUID(ctx context.Context, uuid string) (entit
 		UUID:      userDTO.UUID,
 		Name:      userDTO.Name,
 		Email:     userDTO.Email,
+		Password:  userDTO.Password,
 		Phone:     userDTO.Phone,
 		Address:   userDTO.Address,
 		CreatedAt: userDTO.CreatedAt,
@@ -69,6 +72,27 @@ func (ur *UserRepository) GetUserByEmail(ctx context.Context, email string) (ent
 		UUID:      userDTO.UUID,
 		Name:      userDTO.Name,
 		Email:     userDTO.Email,
+		Password:  userDTO.Password,
+		Phone:     userDTO.Phone,
+		Address:   userDTO.Address,
+		CreatedAt: userDTO.CreatedAt,
+		UpdatedAt: userDTO.UpdatedAt,
+	}, nil
+}
+
+// GetUserByEmailWithPassword é específico para autenticação, incluindo a senha
+func (ur *UserRepository) GetUserByEmailWithPassword(ctx context.Context, email string) (entities.User, error) {
+	var userDTO dtos.UserDTO
+	if err := ur.db.WithContext(ctx).Where("email = ?", email).First(&userDTO).Error; err != nil {
+		return entities.User{}, err
+	}
+
+	return entities.User{
+		ID:        userDTO.ID,
+		UUID:      userDTO.UUID,
+		Name:      userDTO.Name,
+		Email:     userDTO.Email,
+		Password:  userDTO.Password,
 		Phone:     userDTO.Phone,
 		Address:   userDTO.Address,
 		CreatedAt: userDTO.CreatedAt,

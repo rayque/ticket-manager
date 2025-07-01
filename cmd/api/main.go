@@ -3,12 +3,15 @@ package main
 import (
 	"context"
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	"shipping-management/internal/application/usecases"
+	"shipping-management/internal/infrastructure/adapters/auth"
 	"shipping-management/internal/infrastructure/adapters/database"
 	"shipping-management/internal/infrastructure/adapters/uuid"
 	"shipping-management/internal/infrastructure/config"
 	"shipping-management/internal/infrastructure/http"
 	"shipping-management/internal/infrastructure/http/handlers"
+	"shipping-management/internal/infrastructure/http/middleware"
 	repository "shipping-management/internal/infrastructure/repositories"
 )
 
@@ -27,6 +30,14 @@ func main() {
 	if err != nil {
 		panic("failed to connect to postgres database: " + err.Error())
 	}
+
+	// Inicializar serviços de autenticação
+	jwtService := auth.NewJWTService(appConfig.JWTSecret, "shipping-management")
+	passwordService := auth.NewPasswordService()
+	authMiddleware := middleware.NewAuthMiddleware(jwtService)
+
+	// Validador
+	validate := validator.New()
 
 	uuidAdapter := uuid.NewUUIDAdapter()
 
@@ -47,6 +58,10 @@ func main() {
 	updateUserUseCase := usecases.NewUpdateUser(userRepository)
 	deleteUserUseCase := usecases.NewDeleteUser(userRepository)
 
+	// Auth use cases
+	loginUseCase := usecases.NewLoginUseCase(userRepository, jwtService, passwordService)
+	registerUseCase := usecases.NewRegisterUseCase(userRepository, passwordService, uuidAdapter)
+
 	packageHandler := handlers.NewPackageHandler(
 		createUseCase,
 		getUseCase,
@@ -63,7 +78,13 @@ func main() {
 		deleteUserUseCase,
 	)
 
-	http.RegisterRoutes(r, packageHandler, userHandler)
+	authHandler := handlers.NewAuthHandler(
+		loginUseCase,
+		registerUseCase,
+		validate,
+	)
+
+	http.RegisterRoutes(r, packageHandler, userHandler, authHandler, authMiddleware)
 	err = r.Run(":8080")
 	if err != nil {
 		return
