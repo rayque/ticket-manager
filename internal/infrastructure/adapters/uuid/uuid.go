@@ -14,3 +14,7 @@ func NewUUIDAdapter() interfaces.UUID {
 func (u *uuidAdapter) NewUUID() string {
 	return uuid.New().String()
 }
+
+func (u *uuidAdapter) Generate() string {
+	return uuid.New().String()
+}

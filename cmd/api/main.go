@@ -32,12 +32,20 @@ func main() {
 
 	packageRepository := repository.NewPackageRepository(postgresDB)
 	carrierRepository := repository.NewCarrierRepository(mongoDB)
+	userRepository := repository.NewUserRepository(postgresDB)
 
 	createUseCase := usecases.NewCreatePackage(packageRepository, uuidAdapter)
 	getUseCase := usecases.NewGetPackage(packageRepository)
 	updateUseCase := usecases.NewUpdatePackageStatus(packageRepository)
 	packageUseCase := usecases.NewPackageQuotationUseCase(packageRepository, carrierRepository)
 	hireCarrierUseCase := usecases.NewHireCarrierForPackageDelivery(packageRepository)
+
+	// User use cases
+	createUserUseCase := usecases.NewCreateUser(userRepository, uuidAdapter)
+	getUserUseCase := usecases.NewGetUser(userRepository)
+	getAllUsersUseCase := usecases.NewGetAllUsers(userRepository)
+	updateUserUseCase := usecases.NewUpdateUser(userRepository)
+	deleteUserUseCase := usecases.NewDeleteUser(userRepository)
 
 	packageHandler := handlers.NewPackageHandler(
 		createUseCase,
@@ -47,7 +55,15 @@ func main() {
 		hireCarrierUseCase,
 	)
 
-	http.RegisterRoutes(r, packageHandler)
+	userHandler := handlers.NewUserHandler(
+		createUserUseCase,
+		getUserUseCase,
+		getAllUsersUseCase,
+		updateUserUseCase,
+		deleteUserUseCase,
+	)
+
+	http.RegisterRoutes(r, packageHandler, userHandler)
 	err = r.Run(":8080")
 	if err != nil {
 		return
